@@ -9,10 +9,11 @@ export PORT=$OPENSHIFT_INTERNAL_PORT
 export HOST=$OPENSHIFT_INTERNAL_IP
 export HOME=$OPENSHIFT_DATA_DIR/home
 export LEIN_JVM_OPTS=-Duser.home=$HOME
+export APPDIR="examplenoir"
+export LEIN_REPL_HOST=$HOST
+cd $OPENSHIFT_REPO_DIR/diy/$APPDIR
 
-cd $OPENSHIFT_REPO_DIR/diy/examplenoir
+$OPENSHIFT_REPO_DIR/diy/$APPDIR/bin/lein deps
 
-$OPENSHIFT_REPO_DIR/bin/lein deps
-
-$OPENSHIFT_REPO_DIR/bin/lein run >${OPENSHIFT_LOG_DIR}/lein.log 2>&1 &
+$OPENSHIFT_REPO_DIR/diy/$APPDIR/bin/lein run >${OPENSHIFT_DIY_LOG_DIR}/lein.log 2>&1 &
 disown
