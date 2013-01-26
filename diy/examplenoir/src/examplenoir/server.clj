@@ -6,7 +6,7 @@
 (defn -main [& m]
   (let [mode (keyword (or (first m) :dev))
         port (Integer. (get (System/getenv) "OPENSHIFT_INTERNAL_PORT" "8080"))
-        host (get (System/getenv) “OPENSHIFT_INTERNAL_IP”)]
+        host (get (System/getenv) "OPENSHIFT_INTERNAL_IP")]
     (server/start port {:mode mode
                         :ns 'examplenoir
                         :jetty-options {:host host}})))
